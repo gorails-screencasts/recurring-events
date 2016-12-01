@@ -6,7 +6,7 @@
   <div><strong><%= day.to_s(:long) %></strong></div>
   <% events.each do |event| %>
     <div>
-      <%= link_to event.name, event_path(event.id) %>
+      <%= link_to event.name, event_path(event.id, time: event.start_time) %>
     </div>
   <% end %>
 <% end %>

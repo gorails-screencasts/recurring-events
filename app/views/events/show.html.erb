@@ -6,8 +6,8 @@
 </p>
 
 <p>
-  <strong>Start time:</strong>
-  <%= @event.start_time %>
+  <strong>Time:</strong>
+  <%= @time %>
 </p>
 
 <p>
@@ -15,5 +15,7 @@
   <%= @event.recurring %>
 </p>
 
+<%= link_to "Delete All Events", event_path(@event), method: :delete %>
+<%= link_to "Delete Just This Event", event_exceptions_path(@event, event_exception: {time: @time}), method: :post %>
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

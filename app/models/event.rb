@@ -1,6 +1,8 @@
 class Event < ApplicationRecord
   serialize :recurring, Hash
 
+  has_many :event_exceptions
+
   def recurring=(value)
     if RecurringSelect.is_valid_rule?(value)
       super(RecurringSelect.dirty_hash_to_rule(value).to_hash)
@@ -16,6 +18,11 @@ class Event < ApplicationRecord
   def schedule(start)
     schedule = IceCube::Schedule.new(start)
     schedule.add_recurrence_rule(rule)
+
+    event_exceptions.each do |exception|
+      schedule.add_exception_time(exception.time)
+    end
+
     schedule
   end
 

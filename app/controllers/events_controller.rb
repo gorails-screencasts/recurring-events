@@ -11,6 +11,11 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    begin
+      @time = Time.parse(params[:time])
+    rescue
+      @time = @event.start_time
+    end
   end
 
   # GET /events/new
